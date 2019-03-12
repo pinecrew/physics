@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+{% block extra_css %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pages/auth.css')|version }}">
+{% endblock %}
+
+{% block header %}
+<ul class="nav-main">
+    <li><a href="/"><i class="fa fa-angle-left"></i> Назад</a></li>
+</ul>
+{% endblock %}
+
+{% block body %}
+    <div class="window" id="login_window">
+        <form action="{{ url_for('login') }}" id="login_form" method="POST">
+            <div><h1 class="window-title">Вход</h1></div>
+            <div>
+                <i class="fa fa-user"></i>
+                <input type="text" name="username" id="id_username" required="required">
+                       <!-- placeholder="Введите имя пользователя"> -->
+            </div>
+            <div>
+                <i class="fa fa-key"></i>
+                <input type="password" name="password" id="id_password" required="required">
+                       <!-- placeholder="Введите пароль"> -->
+            </div>
+            <div><button type="submit" class="dft-button submit">Войти</button></div>
+            {% if get_flashed_messages() %}
+            <div class="alert alert-error">
+                {% for error in get_flashed_messages() %}{{ error }}{% endfor %}
+            </div>
+            {% endif %}
+        </form>
+    </div>
+{% endblock %}
